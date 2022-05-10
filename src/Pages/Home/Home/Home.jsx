@@ -4,6 +4,7 @@ import Appointment from "../Appointment/Appointment";
 import Hero from "../Hero/Hero";
 import Infos from "../Infos/Infos";
 import Services from "../Services/Services";
+import Testimonial from "../Testimonial/Testimonial";
 const Home = () => {
   return (
     <section id="home">
@@ -30,12 +31,15 @@ const Home = () => {
               here', making it look like readable English. Many desktop
               publishing packages and web page
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <button className="btn bg-gradient-to-r from-primary to-secondary text-white">
+              Get Started
+            </button>
           </div>
         </div>
       </div>
       {/* end featured  */}
       <Appointment />
+      <Testimonial />
     </section>
   );
 };
