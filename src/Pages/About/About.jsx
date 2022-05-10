@@ -53,7 +53,10 @@ const About = () => {
                   disrupt butcher paleo intelligentsia pabst before they sold
                   out four loko. 3 wolf moon brooklyn.
                 </p>
-                <a className="text-indigo-500 inline-flex items-center">
+                <a
+                  href="/"
+                  className="text-indigo-500 inline-flex items-center"
+                >
                   Learn More
                   <svg
                     fill="none"
