@@ -1,6 +1,7 @@
 import React from "react";
 import treatment from "../../../Assets/images/treatment.png";
 import Appointment from "../Appointment/Appointment";
+import Contact from "../Contact/Contact";
 import Hero from "../Hero/Hero";
 import Infos from "../Infos/Infos";
 import Services from "../Services/Services";
@@ -40,6 +41,7 @@ const Home = () => {
       {/* end featured  */}
       <Appointment />
       <Testimonial />
+      <Contact />
     </section>
   );
 };
