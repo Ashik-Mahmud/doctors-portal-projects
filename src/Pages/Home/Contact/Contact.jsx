@@ -19,15 +19,15 @@ const Contact = () => {
           <input
             type="text"
             placeholder="Email address here"
-            class="input input-bordered w-full "
+            className="input input-bordered w-full "
           />
           <input
             type="text"
             placeholder="Subject here"
-            class="input input-bordered w-full "
+            className="input input-bordered w-full "
           />
           <textarea
-            class="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full"
             placeholder="Message"
           ></textarea>
           <button className="btn btn-secondary mt-5 text-white">

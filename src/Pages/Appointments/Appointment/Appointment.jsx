@@ -12,8 +12,8 @@ const Appointment = () => {
           <span>10 SPACES AVAILABLE</span>
           <div className="card-actions justify-center">
             <label
-              for="my-modal-3"
-              class="btn modal-button mt-2 bg-gradient-to-r from-primary to-secondary text-white"
+              htmlFor="my-modal-3"
+              className="btn modal-button mt-2 bg-gradient-to-r from-primary to-secondary text-white"
             >
               Book Appointment
             </label>

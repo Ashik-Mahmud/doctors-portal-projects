@@ -11,8 +11,8 @@ const Appointment = () => {
         <div className="lg:w-3/6 relative">
           <img
             src={doctorImage}
-            className="max-w-xl "
-            style={{ marginBottom: "-3.5rem;", marginTop: "-9rem" }}
+            className="max-w-xl"
+            style={{ marginBottom: "-3.5rem", marginTop: "-9rem" }}
             alt=""
           />
         </div>

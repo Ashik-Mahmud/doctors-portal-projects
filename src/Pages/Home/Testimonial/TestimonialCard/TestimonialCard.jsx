@@ -6,8 +6,8 @@ const TestimonialCard = ({ name, avatar, text, address }) => {
       <div className="card-body">
         <p className="text-left leading-snug">{text}</p>{" "}
         <div className="flex gap-4 items-center my-5">
-          <div class="avatar">
-            <div class="w-12 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+          <div className="avatar">
+            <div className="w-12 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
               <img src={avatar} alt="avatar" />
             </div>
           </div>
