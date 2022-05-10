@@ -4,6 +4,7 @@ import Appointments from "./Pages/Appointments/Appointments";
 import Contact from "./Pages/Contact/Contact";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
+import SignUp from "./Pages/Login/SignUp/SignUp";
 import Reviews from "./Pages/Reviews/Reviews";
 import Footer from "./Shared/Footer/Footer";
 import Header from "./Shared/Header/Header";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
         
         {/* protected routes  */}
 
