@@ -17,18 +17,18 @@ const Header = () => {
       <li>
         <Link to="/contact">Contact Us</Link>
       </li>
-      <li tabindex="0">
+      <li tabIndex="0">
         <Link to="/about">About</Link>
       </li>
     </>
   );
 
   return (
-    <header className="bg-slate-50 py-3">
+    <header className=" py-3 absolute w-full">
       <div className="navbar container mx-auto ">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabindex="0" className="btn btn-ghost lg:hidden">
+            <label tabIndex="0" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -52,7 +52,7 @@ const Header = () => {
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost normal-case text-xl">
-            Doctors Portal
+            Doctors <span className="text-primary"> Para</span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
