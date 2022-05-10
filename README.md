@@ -8,9 +8,24 @@ this is doctors portal web application using react nodejs and mongodb. Here you 
 
 - React js
 - React Router
+- daisyui
+- date-fns
+- react
+- react-day-picker
+- react-dom
+- react-scripts
+- web-vitals
+- react-router-dom
+- tailwindcss
 
 ## Required Features
 
 ---
 
 - You can login here
+
+# Demo Preview of this application
+
+![imageScreenshot](./preview.png)
+
+> Thanks for reach out me on github.

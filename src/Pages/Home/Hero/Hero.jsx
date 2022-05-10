@@ -4,9 +4,10 @@ import heroImage from "../../../Assets/images/chair.png";
 const Hero = () => {
   return (
     <div
-      className="hero py-40 md:py-64 bg-cover md:bg-contain bg-no-repeat"
+      className="hero py-40 md:py-64 bg-cover md:bg-contain bg-no-repeat "
       style={{
-        background: `url(${bgImage})`,
+        background: `linear-gradient(to top, rgba(255, 255, 255, 0.777), rgba(255, 255, 255, 0.1)), url(${bgImage})`,
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="hero-content flex-col lg:flex-row-reverse justify-between">
