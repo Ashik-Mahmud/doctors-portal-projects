@@ -1,8 +1,17 @@
-import React from "react";
+import { format } from "date-fns";
+import React, { useState } from "react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 import bgImage from "../../Assets/images/bg.png";
 import heroImage from "../../Assets/images/chair.png";
 import Appointment from "./Appointment/Appointment";
 const Appointments = () => {
+  const [selected, setSelected] = useState(new Date());
+  let footer = <p>Please pick a day.</p>;
+  if (selected) {
+    footer = <p>You picked {format(selected, "PP")}.</p>;
+  }
+
   return (
     <>
       <section
@@ -14,20 +23,24 @@ const Appointments = () => {
       >
         <div className="container mx-auto">
           <div className="hero ">
-            <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero-content w-full flex-col  lg:flex-row-reverse justify-around">
               <img
                 src={heroImage}
                 className="lg:max-w-lg rounded-lg shadow-2xl"
                 alt=""
               />
-              <div>
-                <h1 className="text-5xl font-bold">Box Office News!</h1>
-                <p className="py-6">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <button className="btn btn-primary">Get Started</button>
+
+              <div className="lg:w-2/5">
+                <div className="card w-96  bg-base-100 shadow-xl">
+                  <div className="card-body">
+                    <DayPicker
+                      mode="single"
+                      selected={selected}
+                      onSelect={setSelected}
+                      footer={footer}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -37,7 +50,8 @@ const Appointments = () => {
         <div className="container mx-auto">
           <div className="title text-center">
             <p className="text-secondary text-lg mb-24">
-              Available Appointments on April 30, 2022
+              Available Appointments on{" "}
+              <strong>{selected.toDateString()}</strong>
             </p>
           </div>
           <div className="my-10 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
