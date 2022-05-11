@@ -4,8 +4,12 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import bgImage from "../../Assets/images/bg.png";
 import heroImage from "../../Assets/images/chair.png";
+import Loader from "../../Components/Loader/Loader";
+import useTreatments from "../../Hooks/useTreatments";
 import Appointment from "./Appointment/Appointment";
 const Appointments = () => {
+  const { treatments, loading } = useTreatments();
+  const [service, setService] = useState({});
   const [selected, setSelected] = useState(new Date());
   let footer = <p>Please pick a day.</p>;
   if (selected) {
@@ -55,64 +59,74 @@ const Appointments = () => {
             </p>
           </div>
           <div className="my-10 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
-            <Appointment />
-            <Appointment />
-            <Appointment />
-            <Appointment />
-            <Appointment />
-            <Appointment />
+            {loading ? (
+              treatments.map((treatment) => (
+                <Appointment
+                  setService={setService}
+                  key={treatment._id}
+                  treatment={treatment}
+                />
+              ))
+            ) : (
+              <Loader />
+            )}
           </div>
         </div>
       </section>
-      <input type="checkbox" id="my-modal-3" className="modal-toggle" />{" "}
-      <div className="modal">
-        <div className="modal-box relative">
-          <label
-            htmlFor="my-modal-3"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
-          >
-            ✕
-          </label>
-          <h3 className="text-lg font-bold">Cavity Protection</h3>
-          <p className="py-4">
-            You've been selected htmlFor a chance to get one year of
-            subscription to use Wikipedia htmlFor free!
-          </p>
-          <form action="" className="flex flex-col gap-4 mt-5">
-            <input
-              type="text"
-              className="input input-bordered w-full bg-slate-200"
-              readOnly
-              defaultValue={"April 30, 2020"}
-            />
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input input-bordered w-full bg-slate-200"
-              readOnly
-              defaultValue={"10:05 am - 11:30 am"}
-            />
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="input input-bordered w-full "
-            />
-            <input
-              type="text"
-              placeholder="Phone Number"
-              className="input input-bordered w-full"
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              className="input input-bordered w-full "
-            />
-            <button className="btn bg-accent text-white uppercase">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
+      {service && (
+        <>
+          <input type="checkbox" id="my-modal-3" className="modal-toggle" />{" "}
+          <div className="modal">
+            <div className="modal-box relative">
+              <label
+                htmlFor="my-modal-3"
+                className="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <h3 className="text-lg font-bold">{service?.name}</h3>
+              <p className="py-4">
+                You've been selected htmlFor a chance to get one year of
+                subscription to use Wikipedia htmlFor free!
+              </p>
+              <form action="" className="flex flex-col gap-4 mt-5">
+                <input
+                  type="text"
+                  className="input input-bordered w-full bg-slate-200"
+                  readOnly
+                  value={format(selected, "PP")}
+                />
+
+                <select className="select select-bordered w-full ">
+                  {service?.slots?.map((slot, ind) => (
+                    <option key={slot + ind} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="input input-bordered w-full "
+                />
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  className="input input-bordered w-full"
+                />
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className="input input-bordered w-full "
+                />
+                <button className="btn bg-accent text-white uppercase">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
