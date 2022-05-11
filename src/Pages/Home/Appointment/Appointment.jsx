@@ -9,7 +9,11 @@ const Appointment = () => {
     >
       <div className="hero-content justify-around flex-col lg:flex-row">
         <div className="lg:w-3/6 relative">
-          <img src={doctorImage} className="lg:max-w-xl" alt="" />
+          <img
+            src={doctorImage}
+            className="lg:max-w-xl mt-[-10rem] mb-[-3.5rem]"
+            alt=""
+          />
         </div>
         <div className="lg:w-3/6 text-base-100">
           <h3 className="text-lg text-secondary">Appointment</h3>

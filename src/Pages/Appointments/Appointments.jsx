@@ -17,7 +17,7 @@ const Appointments = () => {
     footer = <p>You picked {format(selected, "PP")}.</p>;
   }
   /* handle booking form */
-  const handleBookingForm = (event) => {
+  const handleBookingForm = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
     const time = event.target.slot.value;
@@ -35,8 +35,19 @@ const Appointments = () => {
       phone,
       email,
     };
-    event.target.reset();
-    console.log(data);
+    await fetch(`http://localhost:5000/booking`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success(data.message);
+        event.target.reset();
+        setService(null);
+      });
   };
 
   return (
