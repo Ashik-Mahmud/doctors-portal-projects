@@ -1,5 +1,6 @@
 import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Token from "../Helpers/Token";
 import auth from "./../Firebase/Firebase.config";
 const useFirebase = () => {
   const [user, setUser] = useState({});
@@ -10,6 +11,7 @@ const useFirebase = () => {
     await signInWithPopup(auth, provider)
       .then((res) => {
         setLoading(true);
+        Token(auth?.currentUser?.uid);
       })
       .catch((err) => {
         console.error(err);

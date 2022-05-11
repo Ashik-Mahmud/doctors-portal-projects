@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import bgImage from "../../Assets/images/bg.png";
 import heroImage from "../../Assets/images/chair.png";
 import Loader from "../../Components/Loader/Loader";
+import auth from "../../Firebase/Firebase.config";
 import useTreatments from "../../Hooks/useTreatments";
 import Appointment from "./Appointment/Appointment";
 const Appointments = () => {
@@ -34,6 +35,10 @@ const Appointments = () => {
       time,
       phone,
       email,
+      author: {
+        name: auth?.currentUser?.displayName,
+        uid: auth?.currentUser?.uid,
+      },
     };
     await fetch(`http://localhost:5000/booking`, {
       method: "POST",
@@ -147,6 +152,7 @@ const Appointments = () => {
                   placeholder="Full Name"
                   className="input input-bordered w-full "
                   name="name"
+                  defaultValue={auth?.currentUser?.displayName}
                 />
                 <input
                   name="phone"
@@ -159,6 +165,7 @@ const Appointments = () => {
                   type="text"
                   placeholder="Email"
                   className="input input-bordered w-full "
+                  defaultValue={auth?.currentUser?.email}
                 />
                 <button className="btn bg-accent text-white uppercase">
                   Submit
