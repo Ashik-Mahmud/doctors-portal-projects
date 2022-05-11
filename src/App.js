@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import About from "./Pages/About/About";
 import Appointments from "./Pages/Appointments/Appointments";
@@ -11,6 +12,7 @@ import Header from "./Shared/Header/Header";
 function App() {
   return (
     <>
+    <Toaster />
     <Header />
     <Routes>
         {/* reveal routes  */}

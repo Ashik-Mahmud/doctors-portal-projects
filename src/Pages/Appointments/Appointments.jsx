@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import toast from "react-hot-toast";
 import bgImage from "../../Assets/images/bg.png";
 import heroImage from "../../Assets/images/chair.png";
 import Loader from "../../Components/Loader/Loader";
@@ -15,6 +16,28 @@ const Appointments = () => {
   if (selected) {
     footer = <p>You picked {format(selected, "PP")}.</p>;
   }
+
+  /* handle booking form */
+  const handleBookingForm = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const time = event.target.slot.value;
+    const phone = event.target.phone.value;
+    const email = event.target.email.value;
+    if (!time) return toast.error(`Time field is required.`);
+    if (!name) return toast.error(`Name field is required.`);
+    if (!phone) return toast.error(`Phone number is required.`);
+    if (!email) return toast.error(`Email field is required.`);
+
+    const data = {
+      date: format(selected, "PP"),
+      name,
+      time,
+      phone,
+      email,
+    };
+    console.log(data);
+  };
 
   return (
     <>
@@ -89,7 +112,11 @@ const Appointments = () => {
                 You've been selected htmlFor a chance to get one year of
                 subscription to use Wikipedia htmlFor free!
               </p>
-              <form action="" className="flex flex-col gap-4 mt-5">
+              <form
+                action=""
+                onSubmit={handleBookingForm}
+                className="flex flex-col gap-4 mt-5"
+              >
                 <input
                   type="text"
                   className="input input-bordered w-full bg-slate-200"
@@ -97,7 +124,7 @@ const Appointments = () => {
                   value={format(selected, "PP")}
                 />
 
-                <select className="select select-bordered w-full ">
+                <select name="slot" className="select select-bordered w-full ">
                   {service?.slots?.map((slot, ind) => (
                     <option key={slot + ind} value={slot}>
                       {slot}
@@ -108,13 +135,16 @@ const Appointments = () => {
                   type="text"
                   placeholder="Full Name"
                   className="input input-bordered w-full "
+                  name="name"
                 />
                 <input
+                  name="phone"
                   type="text"
                   placeholder="Phone Number"
                   className="input input-bordered w-full"
                 />
                 <input
+                  name="email"
                   type="text"
                   placeholder="Email"
                   className="input input-bordered w-full "
