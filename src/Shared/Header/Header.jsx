@@ -1,11 +1,22 @@
+import { signOut } from "firebase/auth";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 import auth from "../../Firebase/Firebase.config";
 
 const Header = () => {
   const { isAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  /* handle Log out  */
+  const handleLogOut = async () => {
+    await signOut(auth).then((res) => {
+      toast.success(`Sign Out successfully done.`);
+      navigate("/login");
+    });
+  };
 
+  /* Navbar menus */
   const NavbarMenu = (
     <>
       <li>
@@ -96,7 +107,12 @@ const Header = () => {
                   </small>
                 </div>
               </div>
-              <button className="btn bg-red-400 text-white">Log Out</button>
+              <button
+                onClick={handleLogOut}
+                className="btn bg-red-400 text-white"
+              >
+                Log Out
+              </button>
             </>
           ) : (
             <Link to="/login" className="btn btn-primary text-white">

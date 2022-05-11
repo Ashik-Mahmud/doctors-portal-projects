@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import RequireAuth from "./Auth/RequireAuth";
 import useFirebase from "./Hooks/useFirebase";
 import About from "./Pages/About/About";
 import Appointments from "./Pages/Appointments/Appointments";
@@ -32,7 +33,7 @@ function App() {
             <Route path="/sign-up" element={<SignUp />} />
             
             {/* protected routes  */}
-            <Route path="/my-appointments" element={<MyAppointments />} />
+            <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
 
         </Routes>
         <Footer />
