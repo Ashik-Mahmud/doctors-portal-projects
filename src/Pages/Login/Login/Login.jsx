@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import bgImage from "../../../Assets/images/bg.png";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   return (
@@ -49,8 +50,7 @@ const Login = () => {
               Create an account
             </Link>
           </small>
-          <div className="divider">OR</div>
-          <button className="btn btn-outline">Continue with Google</button>
+          <SocialLogin />
         </div>
       </div>
     </section>

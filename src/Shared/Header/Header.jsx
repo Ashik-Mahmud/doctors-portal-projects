@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../App";
+import auth from "../../Firebase/Firebase.config";
 
 const Header = () => {
+  const { isAuth } = useContext(AuthContext);
+
   const NavbarMenu = (
     <>
       <li>
@@ -17,9 +21,12 @@ const Header = () => {
       <li>
         <Link to="/contact">Contact Us</Link>
       </li>
-      <li>
-        <Link to="/my-appointments">My Appointments</Link>
-      </li>
+      {isAuth && (
+        <li>
+          <Link to="/my-appointments">My Appointments</Link>
+        </li>
+      )}
+
       <li tabIndex="0">
         <Link to="/about">About</Link>
       </li>
@@ -62,9 +69,40 @@ const Header = () => {
           <ul className="menu menu-horizontal p-0">{NavbarMenu}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/login" className="btn btn-primary text-white">
-            Login
-          </Link>
+          {isAuth ? (
+            <>
+              <div className="flex items-center gap-3 mr-5">
+                {auth?.currentUser?.photoURL ? (
+                  <div className="avatar online">
+                    <div className="w-11 rounded-full">
+                      <img
+                        src={auth?.currentUser?.photoURL}
+                        alt={auth?.currentUser?.displayName}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="avatar placeholder">
+                    <div className="bg-neutral-focus text-neutral-content rounded-full w-10">
+                      <span>{auth?.currentUser?.displayName?.slice(0, 1)}</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex flex-col ">
+                  <span>{auth?.currentUser?.displayName}</span>
+                  <small className="text-slate-500">
+                    {auth?.currentUser?.email}
+                  </small>
+                </div>
+              </div>
+              <button className="btn bg-red-400 text-white">Log Out</button>
+            </>
+          ) : (
+            <Link to="/login" className="btn btn-primary text-white">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </header>

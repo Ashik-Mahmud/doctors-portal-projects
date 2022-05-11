@@ -12,7 +12,7 @@ const Appointment = () => {
           <img
             src={doctorImage}
             className="lg:max-w-xl mt-[-10rem] mb-[-3.5rem]"
-            alt=""
+            alt="doctor sir"
           />
         </div>
         <div className="lg:w-3/6 text-base-100">
