@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Loader from "../../Components/Loader/Loader";
+import useUserAppointments from "../../Hooks/useUserAppointments";
 const MyBookings = () => {
+  const { loading, userAppointments } = useUserAppointments();
+
   return (
     <section className="py-24">
       <div className="container mx-auto shadow p-10 rounded my-5">
@@ -18,62 +21,44 @@ const MyBookings = () => {
           </Link>
         </div>
         <div className="overflow-x-auto">
-          <table className="table table-zebra w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Appointed Date</th>
-                <th>Slot</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>ashik@gmail.com</td>
-                <td>0177845484</td>
-                <td>24 Jan, 2022</td>
-                <td>10.20 Am to 11.20 AM</td>
-                <td>
-                  <button className="btn bg-red-500 text-white btn-sm">
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <th>2</th>
-                <td>Cy Ganderton</td>
-                <td>ashik@gmail.com</td>
-                <td>0177845484</td>
-                <td>24 Jan, 2022</td>
-                <td>10.20 Am to 11.20 AM</td>
-                <td>
-                  <button className="btn bg-red-500 text-white btn-sm">
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <th>3</th>
-                <td>Cy Ganderton</td>
-                <td>ashik@gmail.com</td>
-                <td>0177845484</td>
-                <td>24 Jan, 2022</td>
-                <td>10.20 Am to 11.20 AM</td>
-                <td>
-                  <button className="btn bg-red-500 text-white btn-sm">
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          {loading ? (
+            userAppointments.length > 0 ? (
+              <table className="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Appointed Date</th>
+                    <th>Slot</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userAppointments.map((appointment, ind) => (
+                    <tr key={appointment._id}>
+                      <th>{ind + 1}</th>
+                      <td>{appointment?.author?.name}</td>
+                      <td>{appointment?.email}</td>
+                      <td>{appointment?.phone}</td>
+                      <td>{appointment?.date}</td>
+                      <td>{appointment?.time}</td>
+                      <td>
+                        <button className="btn bg-red-500 text-white btn-sm">
+                          Cancel
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              "No Booking Created yet."
+            )
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </section>

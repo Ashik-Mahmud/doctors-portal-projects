@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import bgImage from "../../Assets/images/bg.png";
 import heroImage from "../../Assets/images/chair.png";
 import Loader from "../../Components/Loader/Loader";
@@ -13,6 +14,7 @@ const Appointments = () => {
   const { treatments, loading } = useTreatments();
   const [service, setService] = useState({});
   const [selected, setSelected] = useState(new Date());
+  const navigate = useNavigate();
   let footer = <p>Please pick a day.</p>;
   if (selected) {
     footer = <p>You picked {format(selected, "PP")}.</p>;
@@ -52,6 +54,7 @@ const Appointments = () => {
         toast.success(data.message);
         event.target.reset();
         setService(null);
+        navigate(`/my-appointments`);
       });
   };
 
@@ -97,19 +100,19 @@ const Appointments = () => {
               <strong>{selected.toDateString()}</strong>
             </p>
           </div>
-          <div className="my-10 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
-            {loading ? (
-              treatments?.map((treatment) => (
+          {loading ? (
+            <div className="my-10 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
+              {treatments?.map((treatment) => (
                 <Appointment
                   setService={setService}
                   key={treatment._id}
                   treatment={treatment}
                 />
-              ))
-            ) : (
-              <Loader />
-            )}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <Loader />
+          )}
         </div>
       </section>
       {service && (
