@@ -16,7 +16,6 @@ const Appointments = () => {
   if (selected) {
     footer = <p>You picked {format(selected, "PP")}.</p>;
   }
-
   /* handle booking form */
   const handleBookingForm = (event) => {
     event.preventDefault();
@@ -36,6 +35,7 @@ const Appointments = () => {
       phone,
       email,
     };
+    event.target.reset();
     console.log(data);
   };
 
@@ -83,7 +83,7 @@ const Appointments = () => {
           </div>
           <div className="my-10 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
             {loading ? (
-              treatments.map((treatment) => (
+              treatments?.map((treatment) => (
                 <Appointment
                   setService={setService}
                   key={treatment._id}

@@ -4,10 +4,10 @@ const useTreatments = () => {
   const [treatments, setTreatments] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("/data.json")
+    fetch("http://localhost:5000/treatments")
       .then((res) => res.json())
       .then((data) => {
-        setTreatments(data);
+        setTreatments(data.result);
         setLoading(true);
       });
   }, []);
