@@ -1,9 +1,12 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImage from "../../../Assets/images/bg.png";
+import auth from "../../../Firebase/Firebase.config";
+import Token from "../../../Helpers/Token";
 import useFirebase from "../../../Hooks/useFirebase";
 import SocialLogin from "../SocialLogin/SocialLogin";
-
 const Login = () => {
   /* If user loggedIn */
   const { isAuth } = useFirebase();
@@ -16,6 +19,21 @@ const Login = () => {
     }
   }, [from, navigate, isAuth]);
 
+  /* Handle login system  */
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    if (!email) return toast.error(`Email field is required.`);
+    if (!password) return toast.error(`Password field is required.`);
+    await signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        toast.success(`SignIn successfully done.`);
+        Token(auth?.currentUser?.uid);
+      })
+      .catch((err) => toast.error(err.message.split(":")[1]));
+  };
+
   return (
     <section
       id="login"
@@ -23,7 +41,7 @@ const Login = () => {
       className="grid place-items-center min-h-screen"
     >
       <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
-        <div className="card-body">
+        <form onSubmit={handleLogin} className="card-body">
           <h3 className="text-lg my-2">Login into Account</h3>
           <div className="form-control">
             <label className="label">
@@ -33,6 +51,7 @@ const Login = () => {
               type="text"
               placeholder="email"
               className="input input-bordered"
+              name="email"
             />
           </div>
           <div className="form-control">
@@ -40,9 +59,10 @@ const Login = () => {
               <span className="label-text">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="password"
               className="input input-bordered"
+              name="password"
             />
             <label className="label">
               <a href="/" className="label-text-alt link link-hover">
@@ -63,7 +83,7 @@ const Login = () => {
             </Link>
           </small>
           <SocialLogin />
-        </div>
+        </form>
       </div>
     </section>
   );
