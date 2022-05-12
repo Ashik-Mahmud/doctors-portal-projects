@@ -21,6 +21,8 @@ module.exports = {
                 "base-100": "#ffffff",
               },
             },
+            "night",
+            "light","dark"
            
         ],
         base: true,
