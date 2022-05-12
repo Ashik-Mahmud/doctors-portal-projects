@@ -9,27 +9,20 @@ module.exports = {
         poppins: ['poppins', 'Montserrat'],
       },
     },
-    plugins: [require("daisyui")],
     daisyui: {
-        styled: true,
         themes: [
             {
-              doctorsTheme: {
-                primary: "#0FCFEC",
-                secondary: "#19D3AE",
-                accent: "#3A4256",
-                "base-100": "#ffffff",
-              },
-            },
-            "night",
-            "light","dark"
-           
+            doctorsTheme: {
+              primary: "#0FCFEC",
+              secondary: "#19D3AE",
+              accent: "#3A4256",
+              "base-100": "#ffffff",
+            }
+          },
+            "night","light"
         ],
-        base: true,
-        utils: true,
-        logs: true,
-        rtl: false,
-        prefix: "",
-        darkTheme: "light",
     },
+    plugins: [require("daisyui")],
 }
+
+

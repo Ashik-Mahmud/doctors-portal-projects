@@ -4,8 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 import auth from "../../Firebase/Firebase.config";
-
-const Header = () => {
+const Header = ({ setIsTheme }) => {
   const { isAuth, user } = useContext(AuthContext);
   const navigate = useNavigate();
   /* handle Log out  */
@@ -79,14 +78,10 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">{NavbarMenu}</ul>
           {/* theme icons  */}
-          <label
-            class="swap swap-rotate"
-            data-toggle-theme="dark,light"
-            data-act-class="ACTIVECLASS"
-          >
+          <label className="swap swap-rotate">
             <input type="checkbox" />
             <svg
-              class="swap-on fill-current w-5 h-5"
+              className="swap-on fill-current w-5 h-5"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -94,7 +89,7 @@ const Header = () => {
             </svg>
 
             <svg
-              class="swap-off fill-current w-5 h-5"
+              className="swap-off fill-current w-5 h-5"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >

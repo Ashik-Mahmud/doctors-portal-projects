@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import RequireAuth from "./Auth/RequireAuth";
@@ -16,28 +16,38 @@ import Header from "./Shared/Header/Header";
 export const AuthContext = createContext(null)
 function App() {
     const { isAuth, user } = useFirebase();
+    const [isTheme, setIsTheme] = useState(false)
+    
+    
+useEffect(()=>{
+    console.log(isTheme);
+    
+}, [isTheme])
+     
   return (
     <>
     <Toaster />
-    <AuthContext.Provider value={{isAuth, user}}>
-        <Header />
-        <Routes>
-            {/* reveal routes  */}
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            
-            {/* protected routes  */}
-            <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
+   <section data-theme={`night`}>
+    <AuthContext.Provider  value={{isAuth, user}}>
+            <Header setTheme={setIsTheme} />
+            <Routes>
+                {/* reveal routes  */}
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/appointments" element={<Appointments />} />
+                <Route path="/reviews" element={<Reviews />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                
+                {/* protected routes  */}
+                <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
 
-        </Routes>
-        <Footer />
-    </AuthContext.Provider>
+            </Routes>
+            <Footer />
+        </AuthContext.Provider>
+   </section>
     </>
   );
 }
