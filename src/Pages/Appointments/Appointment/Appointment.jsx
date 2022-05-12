@@ -6,7 +6,7 @@ const Appointment = ({ treatment, setService }) => {
   const { name, slots } = treatment;
   return (
     <>
-      <div className="card bg-base-100 shadow-md border border-gray-50 text-center">
+      <div className="card bg-base-100 shadow-md border border-gray-200 text-center">
         <div className="card-body ">
           <h2 className="text-xl font-semibold text-secondary text-center">
             {name}

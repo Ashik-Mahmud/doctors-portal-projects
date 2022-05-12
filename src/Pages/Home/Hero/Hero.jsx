@@ -6,7 +6,7 @@ const Hero = () => {
     <div
       className="hero py-40 md:py-64 bg-cover md:bg-contain bg-no-repeat "
       style={{
-        background: `linear-gradient(to top, rgba(255, 255, 255, 0.777), rgba(255, 255, 255, 0.1)), url(${bgImage})`,
+        background: ` url(${bgImage})`,
         backgroundAttachment: "fixed",
       }}
     >

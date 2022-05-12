@@ -6,7 +6,7 @@ import { AuthContext } from "../../App";
 import auth from "../../Firebase/Firebase.config";
 
 const Header = () => {
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth, user } = useContext(AuthContext);
   const navigate = useNavigate();
   /* handle Log out  */
   const handleLogOut = async () => {
@@ -85,26 +85,27 @@ const Header = () => {
               <div className="flex items-center gap-3 mr-5">
                 {auth?.currentUser?.photoURL ? (
                   <div className="avatar online">
-                    <div className="w-11 rounded-full">
-                      <img
-                        src={auth?.currentUser?.photoURL}
-                        alt={auth?.currentUser?.displayName}
-                      />
+                    <div className="w-11 rounded-full border">
+                      <img src={user?.photoURL} alt={user?.displayName} />
                     </div>
                   </div>
                 ) : (
                   <div className="avatar placeholder">
                     <div className="bg-neutral-focus text-neutral-content rounded-full w-10">
-                      <span>{auth?.currentUser?.displayName?.slice(0, 1)}</span>
+                      <span>
+                        {user?.displayName
+                          ? user?.displayName?.slice(0, 1)
+                          : "N"}
+                      </span>
                     </div>
                   </div>
                 )}
 
                 <div className="flex flex-col ">
-                  <span>{auth?.currentUser?.displayName}</span>
-                  <small className="text-slate-500">
-                    {auth?.currentUser?.email}
-                  </small>
+                  <span>
+                    {user?.displayName ? user?.displayName : "Not available"}
+                  </span>
+                  <small className="text-slate-500">{user?.email}</small>
                 </div>
               </div>
               <button

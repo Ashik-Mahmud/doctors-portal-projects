@@ -1,9 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import Loader from "../../Components/Loader/Loader";
+import auth from "../../Firebase/Firebase.config";
 import useUserAppointments from "../../Hooks/useUserAppointments";
 const MyBookings = () => {
-  const { loading, userAppointments } = useUserAppointments();
+  const { loading, userAppointments, setUserAppointments } =
+    useUserAppointments();
+
+  /* handle delete appointments */
+  const handleDeleteAppointment = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Canceled!", "Your file has been canceled.", "success");
+        fetch(
+          `http://localhost:5000/booking?uid=${auth?.currentUser?.uid}&&id=${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            const restItems = userAppointments.filter(
+              (appointment) => appointment._id !== id
+            );
+            setUserAppointments(restItems);
+          });
+      }
+    });
+  };
 
   return (
     <section className="py-24">
@@ -22,7 +58,7 @@ const MyBookings = () => {
         </div>
         <div className="overflow-x-auto">
           {loading ? (
-            userAppointments.length > 0 ? (
+            userAppointments?.length > 0 ? (
               <table className="table table-zebra w-full">
                 <thead>
                   <tr>
@@ -45,7 +81,12 @@ const MyBookings = () => {
                       <td>{appointment?.date}</td>
                       <td>{appointment?.time}</td>
                       <td>
-                        <button className="btn bg-red-500 text-white btn-sm">
+                        <button
+                          onClick={() =>
+                            handleDeleteAppointment(appointment?._id)
+                          }
+                          className="btn bg-red-500 text-white btn-sm"
+                        >
                           Cancel
                         </button>
                       </td>

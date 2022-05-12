@@ -16,7 +16,7 @@ const useUserAppointments = () => {
         setLoading(true);
       });
   }, []);
-  return { userAppointments, loading };
+  return { userAppointments, loading, setUserAppointments };
 };
 
 export default useUserAppointments;

@@ -15,11 +15,11 @@ import Footer from "./Shared/Footer/Footer";
 import Header from "./Shared/Header/Header";
 export const AuthContext = createContext(null)
 function App() {
-    const { isAuth } = useFirebase();
+    const { isAuth, user } = useFirebase();
   return (
     <>
     <Toaster />
-    <AuthContext.Provider value={{isAuth}}>
+    <AuthContext.Provider value={{isAuth, user}}>
         <Header />
         <Routes>
             {/* reveal routes  */}
