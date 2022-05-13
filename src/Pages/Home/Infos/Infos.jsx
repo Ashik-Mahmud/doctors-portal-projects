@@ -6,7 +6,7 @@ import InfoCard from "./InfoCard/InfoCard";
 const Infos = () => {
   return (
     <section>
-      <div className="container mx-auto px-6 md:px-0">
+      <div className="container mx-auto  px-6 md:px-0">
         <div className="info-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 py-20">
           <InfoCard
             title="Opening Hours"

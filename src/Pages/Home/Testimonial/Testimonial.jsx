@@ -30,7 +30,7 @@ const testimonialsData = [
 const Testimonial = () => {
   return (
     <section id="testimonial">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-10 lg:px-0">
         <div className="title flex justify-between items-center">
           <div>
             <h4 className="text-lg text-primary">Testimonial</h4>

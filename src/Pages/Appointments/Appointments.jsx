@@ -115,7 +115,7 @@ const Appointments = () => {
             </p>
           </div>
           {loading ? (
-            <div className="my-10 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
+            <div className="my-10 px-10 lg:px-0 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
               {treatments?.map((treatment) => (
                 <Appointment
                   setService={setService}

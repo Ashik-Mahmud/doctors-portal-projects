@@ -27,7 +27,7 @@ const servicesData = [
 const Services = () => {
   return (
     <section>
-      <div className="services container mx-auto py-10">
+      <div className="services container mx-auto py-10 px-10 lg:px-0">
         <div className="title text-center py-6">
           <h3 className="text-lg font-bold uppercase text-secondary">
             OUR SERVICES
