@@ -22,7 +22,7 @@ const MyBookings = () => {
       if (result.isConfirmed) {
         Swal.fire("Canceled!", "Your file has been canceled.", "success");
         fetch(
-          `http://localhost:5000/booking?uid=${auth?.currentUser?.uid}&&id=${id}`,
+          `https://doctors-para-server.herokuapp.com/booking?uid=${auth?.currentUser?.uid}&&id=${id}`,
           {
             method: "DELETE",
             headers: {

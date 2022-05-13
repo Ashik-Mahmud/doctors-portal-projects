@@ -1,6 +1,6 @@
 
 const Token = (token) => {
-    fetch(`http://localhost:5000/login`, {
+    fetch(`https://doctors-para-server.herokuapp.com/login`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

@@ -44,7 +44,7 @@ const Appointments = () => {
         uid: auth?.currentUser?.uid,
       },
     };
-    await fetch(`http://localhost:5000/booking`, {
+    await fetch(`https://doctors-para-server.herokuapp.com/booking`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

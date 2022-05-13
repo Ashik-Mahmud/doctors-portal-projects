@@ -4,7 +4,7 @@ const useTreatments = () => {
   const [treatments, setTreatments] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/treatments")
+    fetch("https://doctors-para-server.herokuapp.com/treatments")
       .then((res) => res.json())
       .then((data) => {
         setTreatments(data.result);

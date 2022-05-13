@@ -5,11 +5,14 @@ const useUserAppointments = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booking?uid=${auth?.currentUser?.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://doctors-para-server.herokuapp.com/booking?uid=${auth?.currentUser?.uid}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setUserAppointments(data.result);
