@@ -101,7 +101,7 @@ const Header = ({ themeToggle }) => {
           {isAuth ? (
             <>
               <div className="flex items-center gap-3 mr-5">
-                {auth?.currentUser?.photoURL ? (
+                {user?.photoURL ? (
                   <div className="avatar online">
                     <div className="w-11 rounded-full border">
                       <img src={user?.photoURL} alt={user?.displayName} />

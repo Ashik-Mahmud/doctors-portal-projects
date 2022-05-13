@@ -8,7 +8,7 @@ const Appointment = () => {
       style={{ background: `url(${bgAppointment})` }}
     >
       <div className="hero-content justify-around flex-col lg:flex-row">
-        <div className="lg:w-3/6 hidden md:visible relative">
+        <div className="lg:w-3/6 hidden md:block relative">
           <img
             src={doctorImage}
             className="lg:max-w-xl mt-[-10rem] mb-[-3.5rem]"
