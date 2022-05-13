@@ -46,7 +46,9 @@ const MyBookings = () => {
       <div className="container mx-auto shadow p-10 rounded my-5">
         <div className="title flex justify-between py-5 mb-5">
           <div>
-            <h2 className="text-2xl font-semibold">My Appointments</h2>
+            <h2 className="text-2xl font-semibold">
+              {auth?.currentUser?.displayName} Appointments
+            </h2>
             <p>here you can see your own bookings</p>
           </div>
           <Link
