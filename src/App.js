@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import RequireAuth from "./Auth/RequireAuth";
@@ -16,20 +16,19 @@ import Header from "./Shared/Header/Header";
 export const AuthContext = createContext(null)
 function App() {
     const { isAuth, user } = useFirebase();
-    const [isTheme, setIsTheme] = useState(false)
-    
-    
-useEffect(()=>{
-    console.log(isTheme);
-    
-}, [isTheme])
-     
+
+    const [isTheme, setIsTheme] = useState(JSON.parse(localStorage.getItem("theme")))
+    const themeToggle = () =>{
+        setIsTheme(prev => !prev)
+        localStorage.setItem("theme", !isTheme);
+    }    
+   
   return (
     <>
     <Toaster />
-   <section data-theme={`night`}>
+   <section data-theme={`${isTheme && "night"}`}>
     <AuthContext.Provider  value={{isAuth, user}}>
-            <Header setTheme={setIsTheme} />
+            <Header themeToggle={themeToggle} />
             <Routes>
                 {/* reveal routes  */}
                 <Route path="/" element={<Home />} />

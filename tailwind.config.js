@@ -19,7 +19,7 @@ module.exports = {
               "base-100": "#ffffff",
             }
           },
-            "night","light"
+            "night","business"
         ],
     },
     plugins: [require("daisyui")],
