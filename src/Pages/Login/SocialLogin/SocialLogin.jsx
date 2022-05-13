@@ -11,7 +11,11 @@ const SocialLogin = () => {
   return (
     <>
       <div className="divider">OR</div>
-      <button onClick={handleGoogleSignIn} className="btn btn-outline">
+      <button
+        type="button"
+        onClick={handleGoogleSignIn}
+        className="btn btn-outline"
+      >
         Continue with Google
       </button>
     </>

@@ -4,6 +4,7 @@ import auth from "../../../Firebase/Firebase.config";
 
 const Appointment = ({ treatment, setService }) => {
   const { name, slots } = treatment;
+
   return (
     <>
       <div className="card bg-base-100 shadow-md border border-gray-200 text-center">
