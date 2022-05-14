@@ -66,7 +66,7 @@ const MyBookings = () => {
                   <tr>
                     <th></th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Treatment</th>
                     <th>Phone</th>
                     <th>Appointed Date</th>
                     <th>Slot</th>
@@ -78,7 +78,7 @@ const MyBookings = () => {
                     <tr key={appointment._id}>
                       <th>{ind + 1}</th>
                       <td>{appointment?.author?.name}</td>
-                      <td>{appointment?.email}</td>
+                      <td>{appointment?.treatment}</td>
                       <td>{appointment?.phone}</td>
                       <td>{appointment?.date}</td>
                       <td>{appointment?.time}</td>

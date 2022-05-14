@@ -4,19 +4,16 @@ import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 import bgImage from "../../Assets/images/bg.png";
 import heroImage from "../../Assets/images/chair.png";
 import Loader from "../../Components/Loader/Loader";
 import auth from "../../Firebase/Firebase.config";
-import useTreatments from "../../Hooks/useTreatments";
 import Appointment from "./Appointment/Appointment";
 const Appointments = () => {
-  const { treatments, loading } = useTreatments();
   const [isReload, setIsReload] = useState(false);
   const [service, setService] = useState({});
   const [selected, setSelected] = useState(new Date());
-  const navigate = useNavigate();
   let footer = <p>Please pick a day.</p>;
   if (selected) {
     footer = <p>You picked {format(selected, "PP")}.</p>;
@@ -39,12 +36,13 @@ const Appointments = () => {
       time,
       phone,
       email,
+      treatment: service.name,
       author: {
         name: auth?.currentUser?.displayName,
         uid: auth?.currentUser?.uid,
       },
     };
-    await fetch(`https://doctors-para-server.herokuapp.com/booking`, {
+    await fetch(`http://localhost:5000/booking`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -53,10 +51,17 @@ const Appointments = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success(data.message);
-        event.target.reset();
+        if (data.success) {
+          toast.success(data.message);
+          /* navigate(`/my-appointments`); */
+        } else {
+          toast.error(
+            `Appointment already set on ${data.result?.date} of slot ${data.result?.time}`
+          );
+        }
         setService(null);
-        navigate(`/my-appointments`);
+        event.target.reset();
+        refetch();
       });
   };
 
@@ -71,6 +76,17 @@ const Appointments = () => {
       })
       .catch((err) => toast.error(err.message.split(":")[1])),
   ];
+
+  /* available treatments  */
+  const {
+    isLoading: loading,
+    data: treatments,
+    refetch,
+  } = useQuery(["available", format(selected, "PP")], () =>
+    fetch(
+      `http://localhost:5000/available?date=${format(selected, "PP")}`
+    ).then((res) => res.json())
+  );
 
   return (
     <>
@@ -98,6 +114,7 @@ const Appointments = () => {
                       selected={selected}
                       onSelect={setSelected}
                       footer={footer}
+                      required
                     />
                   </div>
                 </div>
@@ -111,10 +128,10 @@ const Appointments = () => {
           <div className="title text-center">
             <p className="text-secondary text-lg mb-24">
               Available Appointments on{" "}
-              <strong>{selected.toDateString()}</strong>
+              <strong>{selected?.toDateString()}</strong>
             </p>
           </div>
-          {loading ? (
+          {!loading ? (
             <div className="my-10 px-10 lg:px-0 appointment-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7">
               {treatments?.map((treatment) => (
                 <Appointment
