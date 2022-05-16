@@ -11,6 +11,7 @@ import Login from "./Pages/Login/Login/Login";
 import SignUp from "./Pages/Login/SignUp/SignUp";
 import MyAppointments from "./Pages/MyAppointments/MyAppointments";
 import Reviews from "./Pages/Reviews/Reviews";
+import Users from "./Pages/Users/Users";
 import Footer from "./Shared/Footer/Footer";
 import Header from "./Shared/Header/Header";
 export const AuthContext = createContext(null)
@@ -42,6 +43,7 @@ function App() {
                 
                 {/* protected routes  */}
                 <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
+                <Route path="/users" element={<RequireAuth><Users /></RequireAuth>} />
 
             </Routes>
             <Footer />

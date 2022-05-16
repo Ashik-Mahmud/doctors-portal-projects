@@ -8,6 +8,7 @@ const SocialLogin = () => {
     const provider = new GoogleAuthProvider();
     socialProviderLogin(provider);
   };
+
   return (
     <>
       <div className="divider">OR</div>

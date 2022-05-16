@@ -1,5 +1,6 @@
 import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
+import CreateUser from "../Helpers/CreateUser";
 import Token from "../Helpers/Token";
 import auth from "./../Firebase/Firebase.config";
 const useFirebase = () => {
@@ -12,6 +13,7 @@ const useFirebase = () => {
       .then((res) => {
         setLoading(true);
         Token(auth?.currentUser?.uid);
+        CreateUser(auth?.currentUser);
       })
       .catch((err) => {
         console.error(err);

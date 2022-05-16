@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImage from "../../../Assets/images/bg.png";
 import auth from "../../../Firebase/Firebase.config";
+import CreateUser from "../../../Helpers/CreateUser";
 import Token from "../../../Helpers/Token";
 import useFirebase from "../../../Hooks/useFirebase";
 import SocialLogin from "../SocialLogin/SocialLogin";
@@ -38,6 +39,7 @@ const SignUp = () => {
           Token(auth?.currentUser?.uid);
         });
         setLoading(false);
+        CreateUser(auth?.currentUser);
       })
       .catch((err) => {
         setLoading(false);

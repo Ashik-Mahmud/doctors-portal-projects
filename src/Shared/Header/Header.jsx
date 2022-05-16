@@ -32,9 +32,22 @@ const Header = ({ themeToggle }) => {
         <Link to="/contact">Contact Us</Link>
       </li>
       {isAuth && (
-        <li>
-          <Link to="/my-appointments">My Appointments</Link>
-        </li>
+        <>
+          <li className="dropdown dropdown-hover">
+            <label tabIndex="0">Dashboard</label>
+            <ul
+              tabIndex="0"
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="/my-appointments">My Appointments</Link>
+              </li>
+              <li>
+                <Link to="/users">Users</Link>
+              </li>
+            </ul>
+          </li>
+        </>
       )}
 
       <li tabIndex="0">
