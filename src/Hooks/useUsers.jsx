@@ -5,7 +5,7 @@ const useUsers = (user) => {
   const [userLoading, setUserLoading] = useState(false);
   useEffect(() => {
     (async () => {
-      await fetch(`http://localhost:5000/users`, {
+      await fetch(`https://doctors-para-server.herokuapp.com/users`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

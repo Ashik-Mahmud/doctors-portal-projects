@@ -1,7 +1,7 @@
 
 const CreateUser = async(user) => {
 
-      await fetch(`http://localhost:5000/users?email=${user?.email}`, {
+      await fetch(`https://doctors-para-server.herokuapp.com/users?email=${user?.email}`, {
         method: "put",
         headers: {
           "content-type": "application/json",

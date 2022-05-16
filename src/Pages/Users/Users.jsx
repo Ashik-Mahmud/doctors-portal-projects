@@ -7,7 +7,7 @@ const Users = () => {
   const { isLoading, data, refetch } = useQuery(
     "users",
     async () =>
-      await fetch(`http://localhost:5000/users`, {
+      await fetch(`https://doctors-para-server.herokuapp.com/users`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

@@ -5,11 +5,14 @@ const useAdmin = (user) => {
   const [adminLoading, setAdminLoading] = useState(false);
   useEffect(() => {
     (async () => {
-      await fetch(`http://localhost:5000/users/isAdmin?email=${user?.email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      await fetch(
+        `https://doctors-para-server.herokuapp.com/users/isAdmin?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setIsAdmin(data.isAdmin);

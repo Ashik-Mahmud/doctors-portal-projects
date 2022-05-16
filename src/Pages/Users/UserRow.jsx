@@ -5,7 +5,7 @@ const UserRow = ({ email, uid, role, refetch }) => {
   /*  make an admin */
   const makeAnAdmin = async () => {
     await fetch(
-      `http://localhost:5000/users/admin?email=${email}&&uid=${auth?.currentUser?.uid}`,
+      `https://doctors-para-server.herokuapp.com/users/admin?email=${email}&&uid=${auth?.currentUser?.uid}`,
       {
         method: "PUT",
         headers: {

@@ -42,7 +42,7 @@ const Appointments = () => {
         uid: auth?.currentUser?.uid,
       },
     };
-    await fetch(`http://localhost:5000/booking`, {
+    await fetch(`https://doctors-para-server.herokuapp.com/booking`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -84,7 +84,10 @@ const Appointments = () => {
     refetch,
   } = useQuery(["available", format(selected, "PP")], () =>
     fetch(
-      `http://localhost:5000/available?date=${format(selected, "PP")}`
+      `https://doctors-para-server.herokuapp.com/available?date=${format(
+        selected,
+        "PP"
+      )}`
     ).then((res) => res.json())
   );
 
