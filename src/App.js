@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import RequireAdmin from "./Auth/RequireAdmin";
 import RequireAuth from "./Auth/RequireAuth";
 import useFirebase from "./Hooks/useFirebase";
 import About from "./Pages/About/About";
@@ -43,7 +44,7 @@ function App() {
                 
                 {/* protected routes  */}
                 <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
-                <Route path="/users" element={<RequireAuth><Users /></RequireAuth>} />
+                <Route path="/users" element={<RequireAuth><RequireAdmin><Users /></RequireAdmin></RequireAuth>} />
 
             </Routes>
             <Footer />

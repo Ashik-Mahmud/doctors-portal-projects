@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 import auth from "../../Firebase/Firebase.config";
+import useAdmin from "../../Hooks/useAdmin";
 const Header = ({ themeToggle }) => {
   const { isAuth, user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ const Header = ({ themeToggle }) => {
       navigate("/login");
     });
   };
+
+  const [isAdmin] = useAdmin(auth?.currentUser);
 
   /* Navbar menus */
   const NavbarMenu = (
@@ -42,9 +45,11 @@ const Header = ({ themeToggle }) => {
               <li>
                 <Link to="/my-appointments">My Appointments</Link>
               </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
+              {isAdmin && (
+                <li>
+                  <Link to="/users">Users</Link>
+                </li>
+              )}
             </ul>
           </li>
         </>
