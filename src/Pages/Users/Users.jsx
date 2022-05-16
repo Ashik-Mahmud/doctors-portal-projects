@@ -1,6 +1,21 @@
 import React from "react";
+import { useQuery } from "react-query";
+import Loader from "../../Components/Loader/Loader";
+import UserRow from "./UserRow";
 
 const Users = () => {
+  const { isLoading, data, refetch } = useQuery(
+    "users",
+    async () =>
+      await fetch(`http://localhost:5000/users`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json())
+  );
+
   return (
     <section className="users py-32">
       <div className="container mx-auto shadow p-5">
@@ -8,65 +23,31 @@ const Users = () => {
           <h3 className="text-2xl font-semibold">Get All the Users</h3>
           <p>You will get the all the user from here</p>
         </div>
-        <div class="overflow-x-auto">
-          <table class="table w-full">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Action</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>ashik@gamil.com </td>
-                <td>
-                  <button className="btn btn-secondary btn-xs">
-                    Make admin
-                  </button>
-                </td>
-                <td>
-                  <button className="btn bg-red-500 text-white btn-xs">
-                    Remove from DB
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th>2</th>
-                <td>Cy Ganderton</td>
-                <td>ashik@gamil.com </td>
-                <td>
-                  <button className="btn btn-secondary btn-xs">
-                    Make admin
-                  </button>
-                </td>
-                <td>
-                  <button className="btn bg-red-500 text-white btn-xs">
-                    Remove from DB
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th>3</th>
-                <td>Cy Ganderton</td>
-                <td>ashik@gamil.com </td>
-                <td>
-                  <button className="btn btn-secondary btn-xs">
-                    Make admin
-                  </button>
-                </td>
-                <td>
-                  <button className="btn bg-red-500 text-white btn-xs">
-                    Remove from DB
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="overflow-x-auto">
+          {!isLoading ? (
+            data?.result?.length > 0 ? (
+              <table className="table w-full">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data?.result.map((user) => (
+                    <UserRow key={user._id} {...user} refetch={refetch} />
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              "No data found"
+            )
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </section>

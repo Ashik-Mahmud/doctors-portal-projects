@@ -1,8 +1,8 @@
 
 const CreateUser = async(user) => {
 
-      await fetch(`http://localhost:5000/users`, {
-        method: "PUT",
+      await fetch(`http://localhost:5000/users?email=${user?.email}`, {
+        method: "put",
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -14,7 +14,7 @@ const CreateUser = async(user) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          
         });
 
 };
