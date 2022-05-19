@@ -5,8 +5,10 @@ import RequireAdmin from "./Auth/RequireAdmin";
 import RequireAuth from "./Auth/RequireAuth";
 import useFirebase from "./Hooks/useFirebase";
 import About from "./Pages/About/About";
+import AddDoctor from "./Pages/AddDoctor/AddDoctor";
 import Appointments from "./Pages/Appointments/Appointments";
 import Contact from "./Pages/Contact/Contact";
+import DoctorsList from "./Pages/DoctorsList/DoctorsList";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
 import SignUp from "./Pages/Login/SignUp/SignUp";
@@ -45,6 +47,8 @@ function App() {
                 {/* protected routes  */}
                 <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
                 <Route path="/users" element={<RequireAuth><RequireAdmin><Users /></RequireAdmin></RequireAuth>} />
+                <Route path="/add-doctor" element={<RequireAuth><RequireAdmin><AddDoctor /></RequireAdmin></RequireAuth>} />
+                <Route path="/doctor-list" element={<RequireAuth><RequireAdmin><DoctorsList /></RequireAdmin></RequireAuth>} />
 
             </Routes>
             <Footer />

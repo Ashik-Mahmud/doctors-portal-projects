@@ -46,9 +46,17 @@ const Header = ({ themeToggle }) => {
                 <Link to="/my-appointments">My Appointments</Link>
               </li>
               {isAdmin && (
-                <li>
-                  <Link to="/users">Users</Link>
-                </li>
+                <>
+                  <li>
+                    <Link to="/users">Users</Link>
+                  </li>
+                  <li>
+                    <Link to="/add-doctor">Add New Doctor</Link>
+                  </li>
+                  <li>
+                    <Link to="/doctor-list">Doctors List</Link>
+                  </li>
+                </>
               )}
             </ul>
           </li>
