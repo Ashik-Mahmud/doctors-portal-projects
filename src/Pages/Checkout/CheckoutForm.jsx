@@ -11,14 +11,17 @@ const CheckoutForm = ({ findOneAppointment }) => {
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/payments/create-payments-intent`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify({ price }),
-    })
+    fetch(
+      `https://doctors-para-server.herokuapp.com/payments/create-payments-intent`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ price }),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result?.clientSecret) {
