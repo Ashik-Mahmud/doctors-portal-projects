@@ -7,6 +7,7 @@ import useFirebase from "./Hooks/useFirebase";
 import About from "./Pages/About/About";
 import AddDoctor from "./Pages/AddDoctor/AddDoctor";
 import Appointments from "./Pages/Appointments/Appointments";
+import Checkout from "./Pages/Checkout/Checkout";
 import Contact from "./Pages/Contact/Contact";
 import DoctorsList from "./Pages/DoctorsList/DoctorsList";
 import Home from "./Pages/Home/Home/Home";
@@ -46,6 +47,7 @@ function App() {
                 
                 {/* protected routes  */}
                 <Route path="/my-appointments" element={<RequireAuth><MyAppointments /></RequireAuth>} />
+                <Route path="/checkout/:checkOutId" element={<RequireAuth><Checkout /></RequireAuth>} />
                 <Route path="/users" element={<RequireAuth><RequireAdmin><Users /></RequireAdmin></RequireAuth>} />
                 <Route path="/add-doctor" element={<RequireAuth><RequireAdmin><AddDoctor /></RequireAdmin></RequireAuth>} />
                 <Route path="/doctor-list" element={<RequireAuth><RequireAdmin><DoctorsList /></RequireAdmin></RequireAuth>} />

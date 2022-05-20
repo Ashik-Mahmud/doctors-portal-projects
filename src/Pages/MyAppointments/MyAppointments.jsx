@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from "../../Components/Loader/Loader";
 import auth from "../../Firebase/Firebase.config";
@@ -8,6 +8,7 @@ const MyBookings = () => {
   const { loading, userAppointments, setUserAppointments } =
     useUserAppointments();
 
+  const navigate = useNavigate();
   /* handle delete appointments */
   const handleDeleteAppointment = (id) => {
     Swal.fire({
@@ -70,6 +71,7 @@ const MyBookings = () => {
                     <th>Phone</th>
                     <th>Appointed Date</th>
                     <th>Slot</th>
+                    <th>Pay</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -82,6 +84,16 @@ const MyBookings = () => {
                       <td>{appointment?.phone}</td>
                       <td>{appointment?.date}</td>
                       <td>{appointment?.time}</td>
+                      <td>
+                        <button
+                          onClick={() =>
+                            navigate(`/checkout/${appointment?._id}`)
+                          }
+                          className="btn btn-primary btn-sm"
+                        >
+                          Pay {appointment?.price}$
+                        </button>
+                      </td>
                       <td>
                         <button
                           onClick={() =>

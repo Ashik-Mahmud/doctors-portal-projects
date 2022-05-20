@@ -36,6 +36,7 @@ const Appointments = () => {
       time,
       phone,
       email,
+      price: service.price,
       treatment: service.name,
       author: {
         name: auth?.currentUser?.displayName,

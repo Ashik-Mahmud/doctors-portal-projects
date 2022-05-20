@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.config";
 
 const Appointment = ({ treatment, setService }) => {
-  const { name, slots } = treatment;
+  const { name, slots, price } = treatment;
 
   return (
     <>
@@ -21,7 +21,7 @@ const Appointment = ({ treatment, setService }) => {
           )}
 
           <span>{slots?.length} SPACES AVAILABLE</span>
-
+          <span>Price: ${price}</span>
           <div className="card-actions justify-center">
             {auth?.currentUser?.uid ? (
               <label
