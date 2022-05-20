@@ -42,6 +42,8 @@ const MyBookings = () => {
     });
   };
 
+  /* Get all Items Which one already transacted */
+
   return (
     <section className="py-24">
       <div className="container mx-auto shadow p-10 rounded my-5">
@@ -66,11 +68,11 @@ const MyBookings = () => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Name</th>
                     <th>Treatment</th>
                     <th>Phone</th>
                     <th>Appointed Date</th>
                     <th>Slot</th>
+                    <th>TransactionID</th>
                     <th>Pay</th>
                     <th>Action</th>
                   </tr>
@@ -79,19 +81,26 @@ const MyBookings = () => {
                   {userAppointments.map((appointment, ind) => (
                     <tr key={appointment._id}>
                       <th>{ind + 1}</th>
-                      <td>{appointment?.author?.name}</td>
                       <td>{appointment?.treatment}</td>
                       <td>{appointment?.phone}</td>
                       <td>{appointment?.date}</td>
                       <td>{appointment?.time}</td>
                       <td>
+                        {appointment?.transactionId
+                          ? appointment?.transactionId
+                          : "null"}
+                      </td>
+                      <td>
                         <button
+                          disabled={appointment?.status === "succeeded" && true}
                           onClick={() =>
                             navigate(`/checkout/${appointment?._id}`)
                           }
                           className="btn btn-primary btn-sm"
                         >
-                          Pay {appointment?.price}$
+                          {appointment?.status === "succeeded"
+                            ? `Paid ${appointment?.price}$`
+                            : `Pay ${appointment?.price}$`}
                         </button>
                       </td>
                       <td>

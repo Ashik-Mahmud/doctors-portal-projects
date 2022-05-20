@@ -1,7 +1,13 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
 import { useParams } from "react-router-dom";
 import useUserAppointments from "../../Hooks/useUserAppointments";
-
+import CheckoutForm from "./CheckoutForm";
+/* options for stripe */
+const stripePromise = loadStripe(
+  "pk_test_51L1TGlIFKTQHETSiTvzqn7XB7QHqL6Gxa3GbqnLZvO1wVtSFdMdEZdEvVY5KhbRUvhyUeBYgvhFIjSKtWg808bal00uf2cj4Hg"
+);
 const Checkout = () => {
   const { checkOutId } = useParams();
   const { userAppointments, loading } = useUserAppointments();
@@ -30,10 +36,11 @@ const Checkout = () => {
                   If we need any information we will direct call you of your
                   number <strong>{findOneAppointment?.phone}</strong>
                 </p>
-                <div className="card-actions">
-                  <button className="btn btn-primary">
-                    Pay {findOneAppointment?.price} $
-                  </button>
+                <div className="card-actions my-10">
+                  {/* payment option  */}
+                  <Elements stripe={stripePromise}>
+                    <CheckoutForm findOneAppointment={findOneAppointment} />
+                  </Elements>
                 </div>
               </div>
             ) : (
