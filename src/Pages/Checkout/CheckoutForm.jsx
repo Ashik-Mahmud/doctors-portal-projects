@@ -70,7 +70,7 @@ const CheckoutForm = ({ findOneAppointment }) => {
       );
       if (paymentIntent?.status === "succeeded") {
         //   for bookings
-        fetch(`http://localhost:5000/booking`, {
+        fetch(`https://doctors-para-server.herokuapp.com/booking`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
