@@ -24,6 +24,8 @@ this is doctors portal web application using react nodejs and mongodb. Here you 
 
 - You can login here
 
+## Live Link <https://doctors-portal-cf910.web.app/>
+
 # Demo Preview of this application
 
 ![imageScreenshot](./preview.png)
